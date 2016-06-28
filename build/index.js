@@ -10,9 +10,13 @@ clippy.Agent = function (path, data, sounds) {
 
     this._queue = new clippy.Queue($.proxy(this._onQueueEmpty, this));
 
-    this._el = $('<div class="clippy"></div>').hide();
-
-    $(document.body).append(this._el);
+    var clippyDiv = $('.clippy');
+    if (clippyDiv.length == 0) {
+        this._el = $('<div class="clippy"></div>').hide();
+        $(document.body).append(this._el);
+    } else {
+        this._el = clippyDiv;
+    }
 
     this._animator = new clippy.Animator(this._el, path, data, sounds);
 
@@ -294,7 +298,7 @@ clippy.Agent.prototype = {
     _onIdleComplete:function (name, state) {
         if (state === clippy.Animator.States.EXITED) {
             this._idleDfd.resolve();
-            
+
             // Always play some idle animation.
             this._queue.next();
         }
@@ -438,7 +442,7 @@ clippy.Agent.prototype = {
 
     _addToQueue:function (func, scope) {
         if (scope) func = $.proxy(func, scope);
-        
+
         // if we're inside an idle animation,
         if (this._isIdleAnimation()) {
             this._idleDfd.done($.proxy(function () {
@@ -447,7 +451,7 @@ clippy.Agent.prototype = {
             this._animator.exitAnimation();
             return;
         }
-        
+
         this._queue.queue(func);
     },
 
@@ -1065,6 +1069,7 @@ clippy.Queue.prototype = {
     },
 };
 
-//
+const path = require('path');
 
+clippy.__agentDir = path.join(__dirname, 'agents');
 module.exports = clippy;
