@@ -7,14 +7,14 @@ const webpack = require('webpack');
 
 const logger = require('./tools/logger')('Webpack');
 
-const baseDir = path.resolve(__dirname + '/../');
+const baseDir = __dirname;
 logger.debug('Using basedir %s', baseDir);
 
 module.exports = {
-  context: path.join(baseDir, 'src'),
+  context: __dirname,
 
   entry: [
-    'index',
+    './src/index.js',
   ],
 
   output: {
@@ -61,19 +61,13 @@ module.exports = {
   postcss: [autoprefixer],
 
   sassLoader: {
-    includePaths: path.join(baseDir, 'src', 'scss'),
+    includePaths: path.join(baseDir, 'scss'),
   },
 
   plugins: [
     new webpack.ProvidePlugin({
       jQuery: 'jquery',
       $: 'jquery',
-    }),
-
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'vendor-bundle.js',
-      minChunks: Infinity,
     }),
 
     new webpack.optimize.DedupePlugin(),

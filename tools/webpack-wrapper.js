@@ -1,6 +1,6 @@
-const webpack = require('webpack');
 const gulp = require('gulp');
-const $ = require('gulp-load-plugins')();
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
 
 const baseConfig = require('../webpack.config');
 
@@ -13,6 +13,7 @@ function normalizeConfig(config = {}, options = {}, base = baseConfig) {
     result.watch = true;
     result.devtool = 'inline-source-map';
   }
+
   return result;
 }
 
@@ -22,6 +23,10 @@ module.exports = function(watch, config = {}, callback = () => {}) {
   let changeHandler = function(err, stats) {
     if (err) {
       errorHandler('Webpack')(err);
+    }
+
+    if (stats.hasErrors()) {
+      errorHandler('Webpack')(stats.toJson().errors);
     }
 
     logger.info(stats.toString({
@@ -37,5 +42,7 @@ module.exports = function(watch, config = {}, callback = () => {}) {
     }
   };
 
-  webpack(webpackOptions, changeHandler);
+  return gulp.src('src/**/*.js')
+      .pipe(webpackStream(webpackOptions, webpack, changeHandler))
+      .pipe(gulp.dest('dist'));
 };
