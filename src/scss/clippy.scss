@@ -1,0 +1,61 @@
+@import 'variables';
+@import 'mixins';
+
+.clippy {
+  @include clippy-float;
+  .clippy-balloon {
+    @include clippy-float;
+
+    background: $clippy-balloon-bg;
+    color: $clippy-balloon-color;
+    padding: $clippy-balloon-padding;
+    border: $clippy-balloon-border;
+    border-radius: $clippy-balloon-border-radius;
+  }
+}
+
+.clippy-content {
+  max-width: 200px;
+  min-width: 120px;
+  font-family: $clippy-font-family;
+  font-size: $clippy-font-size;
+}
+
+.clippy-tip {
+  width: 10px;
+  height: 16px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAgAgMAAABvDLAlAAAACVBMVEUAAAD//8wAAACRWNQ+AAAAAXRSTlMAQObYZgAAAGFJREFUCNdtziEOwCAUA9BmbtxjyTgQZEFN0ltwCTwGwylXUjvzDPy26IkpY8qCKCtO+SLIgaMzN0ACmCzy4iMjqwwc8mDbri3WBveffvVPXznBaU52ixvd7iVe5YVe6+UfnNwnB8+ZFdkAAAAASUVORK5CYII=)  no-repeat;
+  position: absolute;
+
+  .clippy-top-left {
+    @include clippy-corner(100%, 0px, 100%, -50px);
+  }
+
+  .clippy-top-right {
+    @include clippy-corner(100%, 0px, 0, 50px);
+    background-position: -10px 0;
+  }
+
+  .clippy-bottom-right {
+    @include clippy-corner(0, -16px, 0, 50px);
+    background-position: -10px -16px;
+  }
+
+  .clippy-bottom-left {
+    @include clippy-corner(0, -16px, 100%, -50px);
+    background-position: 0px -16px;
+  }
+}
+
+.clippy-choice {
+  display: block;
+  margin: 0.5em 0;
+  padding-left: 22px;
+  text-decoration: none;
+  color: #000080;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKBAMAAAB/HNKOAAAALVBMVEUAAAAAM2YAM5n///+ysrIAZpkzM8yGhoYAmcwzzMx3d3eZ//9m//8zmcwzZpmZ9prkAAAAAXRSTlMAQObYZgAAAERJREFUCNdjYPAqd2BgYKlLVGFgcI8NVHJgKEpVTFRmWKjYESjM4CjWM1WZwVG1e5oyA4tQWKABA4OhkDIDAwOzsQEDAH2RC4gqiJwcAAAAAElFTkSuQmCC) 4px center no-repeat;
+
+  &:hover {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAPFBMVEUAAAAAZpn///+ysrIAM5kAM2aGhoYzZpkAmcyZ//8zzP8z//8AzP//+/BmzMwAzMwAZswzmZkAmZkzM5k2EqaPAAAAAXRSTlMAQObYZgAAAEpJREFUCNcdyFsWgDAIA9EEAq31rfvfq9j5umcAeGY6MNVE+dRNtmA52a+tU82Q8ZzL2hkGJ4ctfFVU4zGouvAQg6XKQmJperdfH157AZiSJ5KvAAAAAElFTkSuQmCC);
+  }
+}
