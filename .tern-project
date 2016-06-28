@@ -1,0 +1,14 @@
+{
+  "libs": [
+    "browser",
+    "ecma6",
+    "jquery"
+  ],
+  "plugins": {
+    "node": {},
+    "node_resolve": {},
+    "modules": {},
+    "es_modules": {},
+    "complete_strings": {}
+  }
+}
