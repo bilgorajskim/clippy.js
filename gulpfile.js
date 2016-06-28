@@ -9,9 +9,11 @@ var gulp = require('gulp'), uglify = require('gulp-uglify'),
     rename = require('gulp-rename'), babel = require('gulp-babel'),
     rimraf = require('rimraf'), imagemin = require('gulp-imagemin');
 
-const sequence = require('gulp-sequence');
+const sequence = require('run-sequence');
 
-gulp.task('clean', (callback) => { return rimraf('./dist', callback); });
+gulp.task('clean', (callback) => {
+    return rimraf(['./dist', './build'], callback);
+});
 
 gulp.task('build-mapfile-image', function() {
     return gulp.src('agents/**/*.png')
@@ -69,8 +71,11 @@ gulp.task('build:babel', function() {
 
 gulp.task('build', (cb) => {
     let tasks = [
-        ['clean'], 'build-js', 'build-css', 'build-agents', 'build-mapfile',
-        'build-mapfile-image', 'build-node'
+        'clean',
+        [
+          ['build-mapfile', 'build-mapfile-image', ['build-agents']],
+          ['build-js', 'build-css', 'build-node'],
+        ]
     ];
 
     sequence(tasks, cb);

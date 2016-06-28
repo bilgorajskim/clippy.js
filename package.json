@@ -30,9 +30,9 @@
     "gulp-concat": "*",
     "gulp-imagemin": "*",
     "gulp-rename": "*",
-    "gulp-sequence": "^0.4.5",
     "gulp-uglify": "*",
     "imagemin-pngquant": "*",
-    "rimraf": "*"
+    "rimraf": "*",
+    "run-sequence": "^1.2.1"
   }
 }
