@@ -1,6 +1,6 @@
 {
   "name": "clippy.js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Add Clippy or his friends to any website for instant nostalgia.",
   "main": "build/index.js",
   "scripts": {
@@ -24,8 +24,8 @@
   "files": [
     "build/**"
   ],
-  "css": ["build/clippy.css"],
-  "agents": ["build/agents/**/*"],
+  "css": "build/clippy.css",
+  "agents": "build/agents/**/*",
   "homepage": "https://github.com/baberthal/clippy.js",
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
