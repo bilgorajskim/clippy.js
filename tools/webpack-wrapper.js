@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 
-const baseConfig = require('../webpack.config');
+const baseConfig = require('../config').webpack.base;
 
 const logger = require('./logger')('Webpack-Wrapper');
 const errorHandler = require('./error-handler');

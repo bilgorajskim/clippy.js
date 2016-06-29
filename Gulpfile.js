@@ -11,6 +11,7 @@ const pngquant = require('imagemin-pngquant');
 const del = require('del');
 const sequence = require('run-sequence');
 const browserSync = require('browser-sync').create();
+const karma = require('karma');
 
 const tools = require('./tools');
 const config = require('./config');
@@ -125,6 +126,17 @@ gulp.task('build:production', (callback) => {
   process.env.NODE_ENV = 'production';
   logger.info('Webpack %s build...', process.env.NODE_ENV);
   gulp.start('build', callback);
+});
+
+/////////////////////////////////////////////////////////////////////////////////
+//                                    TESTS                                    //
+/////////////////////////////////////////////////////////////////////////////////
+gulp.task('test:serve', ['build:webpack:watch'], (callback) => {
+  tools.test.server(config.karma, true, callback);
+});
+
+gulp.task('test', (callback) => {
+  tools.test.server(config.karma, false, callback);
 });
 
 gulp.task('default', ['build']);

@@ -4,16 +4,30 @@
 'use strict';
 
 module.exports = function(config) {
+  var getBrowsers = function() {
+    var env = require('./env');
+    if (env.test()) {
+      return [
+        'Chrome',
+        'PhantomJS',
+        'Firefox',
+        'Safari',
+      ];
+    } else {
+      return ['PhantomJS'];
+    }
+  };
+
   config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '../',
 
     // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+    // available frameworks: https:/r/npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
 
     // list of files / patterns to load in the browser
-    files: ['src/**/*.js', 'test/**/*.js'],
+    files: ['node_modules/jquery/dist/jquery.js', 'test/**/*.js'],
 
     // list of files to exclude
     exclude: [],
@@ -22,7 +36,7 @@ module.exports = function(config) {
     // available preprocessors:
     // https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      '*.js': ['webpack', 'coverage'],
+      'test/**/*.js': ['webpack', 'coverage'],
     },
 
     // test results reporter to use
@@ -64,7 +78,8 @@ module.exports = function(config) {
     colors: true,
 
     // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN
+    // possible values: config.LOG_DISABLE || config.LOG_ERROR ||
+    // config.LOG_WARN
     // || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
@@ -75,12 +90,7 @@ module.exports = function(config) {
     // start these browsers
     // available browser launchers:
     // https://npmjs.org/browse/keyword/karma-launcher
-    browsers: [
-      'Chrome',
-      'PhantomJS',
-      'Firefox',
-      'Safari',
-    ],
+    browsers: getBrowsers(),
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits

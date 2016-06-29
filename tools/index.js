@@ -7,4 +7,5 @@ module.exports = {
   logger: logger,
   errorHandler: require('./error-handler'),
   webpackWrapper: require('./webpack-wrapper'),
+  test: require('./test-tools'),
 };

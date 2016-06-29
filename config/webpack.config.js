@@ -6,9 +6,9 @@ const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const logger = require('./tools/logger')('Webpack');
+const logger = require('../tools/logger')('Webpack');
 
-const baseDir = __dirname;
+const baseDir = path.normalize(__dirname + '/..');
 logger.debug('Using basedir %s', baseDir);
 
 const buildENV = process.env.NODE_ENV || 'development';
