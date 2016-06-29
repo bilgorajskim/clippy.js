@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ClippyJS - QUnit</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.0.css" type="text/css" media="all">
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../dist/vendor.js"></script>
+    <script src="../dist/clippy.js"></script>
+    <script src="https://code.jquery.com/qunit/qunit-2.0.0.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        QUnit.test('a basic example', function(assert) {
+	    var value = 'hello';
+	    assert.equal(value, 'hello', 'Expected `hello`, got ' + value);
+	});
+    </script>
+    <script type="text/javascript" charset="utf-8">
+	clippy.load('Clippy', function(agent) {
+	    agent.show();
+	    window.agent = agent;
+	});
+    </script>
+</body>
+</html>
+
