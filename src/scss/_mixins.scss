@@ -1,9 +1,3 @@
-@mixin clippy-float {
-  position: fixed;
-  z-index: 1000;
-  cursor: pointer;
-}
-
 @mixin clippy-corner($top, $mtop, $left, $mleft) {
   top: $top;
   margin-top: $mtop;

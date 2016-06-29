@@ -4,9 +4,9 @@
  * @constructor
  */
 
-import $ from 'jquery';
+const $ = require('jquery');
 
-export class Queue {
+class Queue {
   constructor(onEmptyCallback) {
     this._queue = [];
     this._onEmptyCallback = onEmptyCallback;
@@ -49,3 +49,5 @@ export class Queue {
     this._queue = [];
   }
 }
+
+module.exports = Queue;

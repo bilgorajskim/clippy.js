@@ -1,13 +1,13 @@
 /* jslint node: true */
 'use strict';
 
-import Animator from './animator';
-import Balloon from './balloon';
-import Queue from './queue';
+const Animator = require('./animator');
+const Balloon = require('./balloon');
+const Queue = require('./queue');
 
-import $ from 'jquery';
+const $ = require('jquery');
 
-export class Agent {
+class Agent {
   constructor(path, data, sounds) {
     this.path = path;
     this._queue = new Queue($.proxy(this._onQueueEmpty, this));
@@ -45,7 +45,8 @@ export class Agent {
       this._el.hide();
       this.stop();
       this.pause();
-      if (callback) callback();
+      if (callback)
+        callback();
       return;
     }
 
@@ -54,7 +55,8 @@ export class Agent {
         if (state === Animator.States.EXITED) {
           el.hide();
           this.pause();
-          if (callback) callback();
+          if (callback)
+            callback();
           complete();
         }
       }, this));
@@ -64,7 +66,8 @@ export class Agent {
   moveTo(x, y, duration) {
     var dir = this._getDirection(x, y);
     var anim = 'Move' + dir;
-    if (duration === undefined) duration = 1000;
+    if (duration === undefined)
+      duration = 1000;
 
     this._addToQueue(function(complete) {
       // the simple case
@@ -101,9 +104,11 @@ export class Agent {
   }
 
   play(animation, timeout, cb) {
-    if (!this.hasAnimation(animation)) return false;
+    if (!this.hasAnimation(animation))
+      return false;
 
-    if (timeout === undefined) timeout = 5000;
+    if (timeout === undefined)
+      timeout = 5000;
 
     this._addToQueue(function(complete) {
       var completed = false;
@@ -111,7 +116,8 @@ export class Agent {
       var callback = function(name, state) {
         if (state === Animator.States.EXITED) {
           completed = true;
-          if (cb) cb();
+          if (cb)
+            cb();
           complete();
         }
       };
@@ -119,7 +125,8 @@ export class Agent {
       // if has timeout, register a timeout function
       if (timeout) {
         window.setTimeout($.proxy(function() {
-          if (completed) return;
+          if (completed)
+            return;
           // exit after timeout
           this._animator.exitAnimation();
         }, this), timeout);
@@ -177,7 +184,9 @@ export class Agent {
   /***
    * Close the current balloon
    */
-  closeBalloon() { this._balloon.close(); }
+  closeBalloon() {
+    this._balloon.close();
+  }
 
   delay(time) {
     time = time || 250;
@@ -208,14 +217,18 @@ export class Agent {
    * @param {String} name
    * @returns {Boolean}
    */
-  hasAnimation(name) { return this._animator.hasAnimation(name); }
+  hasAnimation(name) {
+    return this._animator.hasAnimation(name);
+  }
 
   /***
        * Gets a list of animation names
        *
        * @return {Array.<string>}
        */
-  animations() { return this._animator.animations(); }
+  animations() {
+    return this._animator.animations();
+  }
 
   /***
        * Play a random animation
@@ -254,10 +267,14 @@ export class Agent {
     var r = Math.round((180 * Math.atan2(a, b)) / Math.PI);
 
     // Left and Right are for the character, not the screen :-/
-    if (-45 <= r && r < 45) return 'Right';
-    if (45 <= r && r < 135) return 'Up';
-    if (135 <= r && r <= 180 || -180 <= r && r < -135) return 'Left';
-    if (-135 <= r && r < -45) return 'Down';
+    if (-45 <= r && r < 45)
+      return 'Right';
+    if (45 <= r && r < 135)
+      return 'Up';
+    if (135 <= r && r <= 180 || -180 <= r && r < -135)
+      return 'Left';
+    if (-135 <= r && r < -45)
+      return 'Down';
 
     // sanity check
     return 'Top';
@@ -272,7 +289,8 @@ export class Agent {
    * @private
    */
   _onQueueEmpty() {
-    if (this._hidden || this._isIdleAnimation()) return;
+    if (this._hidden || this._isIdleAnimation())
+      return;
     var idleAnim = this._getIdleAnimation();
     this._idleDfd = $.Deferred();
 
@@ -296,7 +314,7 @@ export class Agent {
   _isIdleAnimation() {
     var c = this._animator.currentAnimationName;
     return c && c.indexOf('Idle') == 0 && this._idleDfd &&
-        this._idleDfd.state() === 'pending';
+           this._idleDfd.state() === 'pending';
   }
 
   /**
@@ -336,7 +354,8 @@ export class Agent {
   }
 
   reposition() {
-    if (!this._el.is(':visible')) return;
+    if (!this._el.is(':visible'))
+      return;
     var o = this._el.offset();
     var bH = this._el.outerHeight();
     var bW = this._el.outerWidth();
@@ -423,12 +442,14 @@ export class Agent {
   }
 
   _addToQueue(func, scope) {
-    if (scope) func = $.proxy(func, scope);
+    if (scope)
+      func = $.proxy(func, scope);
 
     // if we're inside an idle animation,
     if (this._isIdleAnimation()) {
-      this._idleDfd.done(
-          $.proxy(function() { this._queue.queue(func); }, this));
+      this._idleDfd.done($.proxy(function() {
+        this._queue.queue(func);
+      }, this));
       this._animator.exitAnimation();
       return;
     }
@@ -449,5 +470,7 @@ export class Agent {
     this._balloon.resume();
   }
 }
+
+module.exports = Agent;
 
 // vim: set ts=8 sw=2 tw=80 ft=javascript et :

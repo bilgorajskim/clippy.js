@@ -1,21 +1,20 @@
 /* jslint node: true */
 'use strict';
 
-import Agent from './agent';
-import Animator from './animator';
-import Balloon from './balloon';
-import {BASE_PATH, clippyLoad, clippyReady, clippySoundsReady} from './load';
-import Queue from './queue';
+const Agent = require('./agent');
+const Animator = require('./animator');
+const Balloon = require('./balloon');
+const clippyCommon = require('./load');
+const Queue = require('./queue');
+require('./scss/clippy.scss');
 
-export const clippy = {
+module.exports = {
   Agent: Agent,
   Animator: Animator,
   Balloon: Balloon,
-  BASE_PATH: BASE_PATH,
-  load: clippyLoad,
-  ready: clippyReady,
-  soundsReady: clippySoundsReady,
+  BASE_PATH: clippyCommon.BASE_PATH,
+  load: clippyCommon.load,
+  ready: clippyCommon.ready,
+  soundsReady: clippyCommon.soundsReady,
   Queue: Queue,
 };
-
-(function() { return window.clippy = clippy; })();

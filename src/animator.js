@@ -1,10 +1,10 @@
 /* jslint node: true */
 'use strict';
 
-import $ from 'jquery';
+const $ = require('jquery');
 
-export class Animator {
-  static states() {
+class Animator {
+  static get States() {
     return {WAITING: 1, EXITED: 0};
   }
 
@@ -195,3 +195,5 @@ export class Animator {
     this._step();
   }
 }
+
+module.exports = Animator;

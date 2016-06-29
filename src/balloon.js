@@ -1,9 +1,9 @@
 /* jslint node: true */
 'use strict';
 
-import $ from 'jquery';
+const $ = require('jquery');
 
-export class Balloon {
+class Balloon {
   constructor(targetEl) {
     this._targetEl = targetEl;
 
@@ -256,3 +256,5 @@ export class Balloon {
     }
   }
 }
+
+module.exports = Balloon;

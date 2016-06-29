@@ -1,10 +1,10 @@
-import $ from 'jquery';
+const $ = require('jquery');
 
-import Agent from './agent';
+const Agent = require('./agent');
 
-export const BASE_PATH = 'agents/';
+const BASE_PATH = 'agents/';
 
-export function clippyLoad(name, successCb, failCb, path) {
+function clippyLoad(name, successCb, failCb, path) {
   path = path || BASE_PATH + name;
 
   var mapDfd = clippyLoad._loadMap(path);
@@ -109,12 +109,12 @@ clippyLoad._getAgentDfd = function(name) {
   return dfd;
 };
 
-export function clippyReady(name, data) {
+function clippyReady(name, data) {
   var dfd = clippyLoad._getAgentDfd(name);
   dfd.resolve(data);
 }
 
-export function clippySoundsReady(name, data) {
+function clippySoundsReady(name, data) {
   var dfd = clippyLoad._sounds[name];
   if (!dfd) {
     dfd = clippyLoad._sounds[name] = $.Deferred();
@@ -122,3 +122,10 @@ export function clippySoundsReady(name, data) {
 
   dfd.resolve(data);
 }
+
+module.exports = {
+  BASE_PATH: BASE_PATH,
+  load: clippyLoad,
+  ready: clippyReady,
+  soundsReady: clippySoundsReady,
+};
