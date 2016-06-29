@@ -1,3 +1,11 @@
 {
-  "presets": ["es2015"]
+  "presets": ["es2015"],
+  "env": {
+    "production": {
+      "sourceMaps": false
+    },
+    "development": {
+      "sourceMaps": "both"
+    }
+  }
 }

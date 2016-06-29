@@ -1,25 +1,34 @@
-/* jslint node: true */
+/* eslint node: true */
 'use strict';
 
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const logger = require('./tools/logger')('Webpack');
 
 const baseDir = __dirname;
 logger.debug('Using basedir %s', baseDir);
 
-module.exports = {
-  context: __dirname,
+const buildENV = process.env.NODE_ENV || 'development';
+
+let config = {
+  context: baseDir,
 
   entry: [
-    './src/index.js',
+    './src',
   ],
 
   output: {
+    library: 'clippy',
+    libraryTarget: 'var',
     path: path.join(baseDir, 'dist'),
     filename: 'clippy.js',
+  },
+
+  externals: {
+    jquery: 'jQuery',
   },
 
   resolve: {
@@ -37,11 +46,11 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'postcss', 'sass'],
+        loaders: ['style', 'css', 'sass'],
       },
       {
         test: /\.css$/,
-        loaders: ['style', 'css', 'postcss'],
+        loaders: ['style', 'css'],
       },
       {
         test: /\.(woff2?|svg)$/,
@@ -70,6 +79,19 @@ module.exports = {
       $: 'jquery',
     }),
 
+    new ExtractTextPlugin('[name].css', {
+      allChunks: true,
+    }),
+
     new webpack.optimize.DedupePlugin(),
   ]
 };
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+  config.output.filename = 'clippy.min.js';
+}
+
+logger.info('Webpack {yellow:%s} build...', buildENV);
+
+module.exports = config;

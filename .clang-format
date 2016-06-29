@@ -17,6 +17,7 @@ AllowShortLoopsOnASingleLine: false
 BinPackArguments: false
 BinPackParameters: false
 IndentCaseLabels: false
+MaxEmptyLinesToKeep: 1
 PenaltyBreakBeforeFirstCallParameter: 10
 PenaltyBreakComment: 300
 PenaltyBreakFirstLessLess: 120
