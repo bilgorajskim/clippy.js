@@ -6,9 +6,10 @@ const baseConfig = require('../webpack.config');
 
 const logger = require('./logger')('Webpack-Wrapper');
 const errorHandler = require('./error-handler');
+const browserSync = require('browser-sync');
 
 function normalizeConfig(config = {}, options = {}, base = baseConfig) {
-  let result = Object.assign({}, config, base);
+  let result = Object.assign({}, base, config);
   if (options.watch) {
     result.watch = true;
     result.devtool = 'inline-source-map';
@@ -18,7 +19,7 @@ function normalizeConfig(config = {}, options = {}, base = baseConfig) {
 }
 
 module.exports = function(watch, config = {}, callback = () => {}) {
-  let webpackOptions = normalizeConfig(config, {watch: true});
+  let webpackOptions = normalizeConfig(config, {watch: watch});
 
   let changeHandler = function(err, stats) {
     if (err) {
@@ -35,6 +36,8 @@ module.exports = function(watch, config = {}, callback = () => {}) {
       hash: false,
       version: false,
     }));
+
+    browserSync.reload();
 
     if (watch) {
       watch = false;
