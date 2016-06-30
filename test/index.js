@@ -1,7 +1,5 @@
-import clippy from '../dist/clippy';
+const testsContext = require.context('.', true, /_test$/);
+testsContext.keys().forEach(testsContext);
 
-describe('clippy', () => {
-  it('should exist', () => {
-    expect(clippy).toBeDefined();
-  });
-});
+const clippyContext = require.context('../src/', true, /index\.js$/);
+clippyContext.keys().forEach(clippyContext);

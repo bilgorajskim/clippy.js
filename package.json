@@ -37,6 +37,7 @@
     "browser-sync": "^2.13.0",
     "css-loader": "^0.23.1",
     "del": "^2.2.1",
+    "eazy-logger": "^3.0.2",
     "eslint": "^2.13.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "gulp": "^3.9.0",
@@ -51,6 +52,7 @@
     "gulp-uglify": "^1.5.4",
     "gulp-util": "^3.0.7",
     "imagemin-pngquant": "^5.0.0",
+    "isparta-loader": "^2.0.0",
     "istanbul-instrumenter-loader": "^0.2.0",
     "jasmine-core": "^2.4.1",
     "karma": "^1.1.0",
@@ -61,19 +63,19 @@
     "karma-jasmine-ajax": "^0.1.13",
     "karma-phantomjs-launcher": "^1.0.1",
     "karma-safari-launcher": "^1.0.0",
+    "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.7.0",
     "node-sass": "^3.8.0",
-    "qunitjs": "^2.0.0",
     "run-sequence": "^1.2.1",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
-    "webpack-stream": "^3.2.0",
-    "yargs": "^4.7.1"
+    "webpack-stream": "^3.2.0"
   },
   "dependencies": {
-    "eazy-logger": "^3.0.2",
+  },
+  "peerDependencies": {
     "jquery": "^3.0.0"
   }
 }
