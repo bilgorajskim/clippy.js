@@ -1,8 +1,8 @@
 {
   "name": "clippy.js",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Add Clippy or his friends to any website for instant nostalgia.",
-  "main": "build/index.js",
+  "main": "src/index.js",
   "scripts": {
     "build": "gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,13 +21,6 @@
   "bugs": {
     "url": "https://github.com/bipbop/clippy.js/issues"
   },
-  "files": [
-    "build/**",
-    "src/**/*.js",
-    "src/scss/*.scss"
-  ],
-  "css": "build/clippy.css",
-  "agents": "build/agents/**/*",
   "homepage": "https://github.com/baberthal/clippy.js",
   "devDependencies": {
     "babel-core": "^6.10.4",
