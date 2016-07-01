@@ -28,7 +28,12 @@ let config = {
   },
 
   externals: {
-    jquery: 'jQuery',
+    'jquery': {
+      root: 'jQuery',
+      commonjs: 'jquery',
+      commonjs2: 'jquery',
+      amd: 'jquery',
+    },
   },
 
   resolve: {
