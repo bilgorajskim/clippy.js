@@ -22,7 +22,7 @@ let config = {
 
   output: {
     library: 'clippy',
-    libraryTarget: 'var',
+    libraryTarget: 'umd',
     path: path.join(baseDir, 'dist'),
     filename: 'clippy.js',
   },
@@ -32,7 +32,7 @@ let config = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx', '.coffee', '.js.coffee'],
+    extensions: ['', '.js', '.coffee', '.js.coffee'],
     alias: {
       jquery: require.resolve('jquery'),
     },
